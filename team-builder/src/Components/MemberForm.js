@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function MemberForm(props) {
     const [member, setMember] = useState({
@@ -9,16 +9,21 @@ function MemberForm(props) {
 
     const handleChange = e => {
         setMember({...member, [e.target.name]: e.target.value})
+        console.log(e.target.value);
     }
 
     const submitForm = e => {
         e.preventDefault();
-        props.addNewMember({member})
-        setMember({title: "", body: "" });
+        props.addNewMember(member)
+        setMember({name: "", age: "", role: ""});
     }
 
+    // useEffect((props) => {
+    //     props.setTeamMembers(member);
+    // }, [member])
+
     return (
-        <div>
+        <div className="member-form">
             <form onSubmit={submitForm}>
                 <label htmlFor="name">Name</label>
                 <input id="name" 
@@ -40,6 +45,7 @@ function MemberForm(props) {
                 type="text" 
                 value={member.role} 
                 onChange={handleChange} />
+                <br />
                 <button type="submit">Add Member</button>
             </form>
         </div>

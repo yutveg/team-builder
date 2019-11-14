@@ -10,22 +10,23 @@ function App() {
     age: "Test",
     role: "Test"
   }]);
-
+  
+  const [toEdit, setToEdit] = useState();
 
   const addNewMember = (member) => {
     const newMember = {
       name: member.name,
       age: member.age,
       role: member.role
-    }
-    setTeamMember({...members, newMember})
+    };
+    setTeamMember([...members, newMember])
   }
 
   return (
     <div className="App">
         <h1>List of Our Team:</h1>
-        <MemberForm addNewMember={addNewMember} />
-        <Members members={members} />
+        <MemberForm addNewMember={addNewMember} setTeamMember={setTeamMember} toEdit={toEdit} />
+        <Members members={members} setToEdit={setToEdit} />
     </div>
   );
 }
